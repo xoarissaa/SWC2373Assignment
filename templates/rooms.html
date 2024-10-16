@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rooms</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Webex Rooms</h2>
+        <ul>
+            {% for room in rooms %}
+                <li>
+                    <strong>{{ room.title }}</strong>
+                    <form method="POST">
+                        <input type="hidden" name="room_id" value="{{ room.id }}">
+                        <textarea name="message" rows="2" placeholder="Enter your message" required></textarea>
+                        <button type="submit">Send Message</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+        <a href="{{ url_for('create_room', access_token=access_token) }}"><button>Create New Room</button></a>
+        <a href="{{ url_for('index') }}"><button>Back to Home</button></a>
+    </div>
+</body>
+</html>
